@@ -19,7 +19,13 @@ class EuropeanOptionPricing(OptionPricing):
     def __init__(self, r, k, S0, T, sigma):
         super().__init__(r, k, S0, T, sigma)
     
+    
     def getPresentValueofOption(self, N, option_type):
+        
+        """
+        This method returns the value of the European option at maturity
+
+        """
 
         S_t = S0 * np.exp((r - 0.5*sigma*sigma)*T + sigma*np.sqrt(T)*np.random.normal(size = N))
         if(option_type == "call" ):
@@ -34,6 +40,12 @@ class AsianOptionPricing(OptionPricing):
         super().__init__(r, k, S0, T, sigma)
     
     def getPresentValueofOption(self, I, M, option_type):
+
+        """
+        This method returns the value of the Asian option at maturity
+        
+        """
+
         dt = self.T/M
         values = sigma*np.sqrt(dt)*np.random.normal(size=(I,M)) + (r-sigma*sigma*0.5)*dt
         #print(values.shape)
